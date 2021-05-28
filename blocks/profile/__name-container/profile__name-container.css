@@ -1,0 +1,6 @@
+.profile__name-container {
+    display: flex;
+    align-items: baseline;
+    max-width: 415px;
+    width: 100%;
+}
