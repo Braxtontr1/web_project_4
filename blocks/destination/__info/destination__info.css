@@ -1,0 +1,6 @@
+.destination__info {
+    display: flex;
+    max-width: 282px;
+    margin: 0;
+    justify-content: space-around;
+}
