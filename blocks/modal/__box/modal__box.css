@@ -1,0 +1,17 @@
+.modal__box {
+    position: relative;
+    width: 430px;
+    height: 330px;
+    display: flex;
+    flex-direction: column;
+    margin: 195px auto auto;
+    background-color: #ffff;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 500px) {
+    .modal__box {
+        width: 282px;
+        height: 322px;
+    }
+}

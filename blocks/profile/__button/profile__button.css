@@ -1,7 +1,9 @@
 .profile__button {
     width: 24px;
     height: 24px;
-    padding-left: 18px;
+    margin-left: 18px;
+    background-image: url(../../../images/edit-button.svg);
+    background-color: inherit;
 }
 
 @media screen and (max-width: 720px) {

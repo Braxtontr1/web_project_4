@@ -1,2 +1,8 @@
 .destination__title {
+    font-size: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 220px;
+    text-transform: capitalize;
 }

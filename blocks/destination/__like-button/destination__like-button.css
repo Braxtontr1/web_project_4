@@ -1,4 +1,16 @@
 .destination__like-button {
-    margin: 0;
-    align-self: center;
+    width: 21px;
+    height: 19px;
+    background-image: url('../../../images/like-button.svg');
+    background-color: inherit;
+    margin: auto 0;
+
+}
+
+.destination__like-button:hover {
+    opacity: 0.5;
+}
+
+.destination__like-button:active {
+    background-image: url('../../../images/like-button-active.svg');
 }

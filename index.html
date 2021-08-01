@@ -9,88 +9,87 @@
     <link rel="stylesheet" href="./pages/index.css">
 </head>
 
-<body>
+<body class="page">
+    <div class="modal">
 
+        <div class="modal__box">
+            <button class="modal__close-button  button" id="modal-close"></button>
+            <form class="form" id="modal-edit-form">
+                <h2 class="form__heading">Edit Profile</h2>
+                <input class="form__item form__name" id="modal-name-input" type="text" name="name" value="jacques cousteau">
+                <input class="form__item form__about-me" id="modal-title-input" type="text" name="title" value="explorer">
+                <input class="form__button button" id="form__save-button" type="submit" value="save">
+            </form>
 
-    <body class="page">
-        <header class="header">
-            <img class="header__image" src="./images/around-the-us.svg" alt="Around The U.S.">
-        </header>
-        <main>
-            <section class="profile">
-                <div class="profile__container">
-                    <img class="profile__image" src="./images/jacques cousteau.jpg" alt="Jacques Cousteau">
-                    <div class="profile__info">
-                        <div class="profile__name-container">
-                            <h1 class="profile__name">jacques cousteau</h1>
-                            <a href="#"><img class="profile__button link-transition" src="./images/edit-button.svg"
-                                    alt="a left facing pen">
-                            </a>
-                        </div>
-                        <p class="profile__occupation-title">explorer</p>
-                    </div>
+        </div>
+        </div>
+    <header class="header">
+        <img class="header__image" src="./images/around-the-us.svg" alt="Around The U.S.">
+    </header>
+    <main>
+        <section class="profile">
+            <div class="profile__container">
+                <img class="profile__image" src="./images/jacques cousteau.jpg" alt="Jacques Cousteau">
+                <div class="profile__info">
+                    <div class="profile__name-container">
+                    <h1 class="profile__name" id="profile-name">jacques cousteau</h1>
+                    <button class="profile__button button" id="modal-open-button"></button>
                 </div>
-                <a class="profile__card-button link-transition" href="#">
-                    <img src="./images/card-button.svg" alt="">
-                </a>
-            </section>
-            <section class="destinations">
-                <article class="destination">
-                    <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park in Utah">
-                    <div class="destination__info">
-                        <h2 class="destination__title">Zion Canyon</h2>
-                        <a class="destination__like-button link-transition" href=""><img src="./images/like-button.svg"
-                                alt="heart shaped button"></a>
-                    </div>
-                </article>
-                <article class="destination">
-                    <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park in Utah">
-                    <div class="destination__info">
-                        <h2 class="destination__title">Zion Canyon</h2>
-                        <a class="destination__like-button link-transition" href=""><img src="./images/like-button.svg"
-                                alt="heart shaped button"></a>
-                    </div>
-                </article>
-                <article class="destination">
-                    <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park in Utah">
-                    <div class="destination__info">
-                        <h2 class="destination__title">Zion Canyon</h2>
-                        <a class="destination__like-button link-transition" href=""><img src="./images/like-button.svg"
-                                alt="heart shaped button"></a>
-                    </div>
-                </article>
-                <article class="destination">
-                    <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park in Utah">
-                    <div class="destination__info">
-                        <h2 class="destination__title">Zion Canyon</h2>
-                        <a class="destination__like-button link-transition" href=""><img src="./images/like-button.svg"
-                                alt="heart shaped button"></a>
-                    </div>
-                </article>
-                <article class="destination">
-                    <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park in Utah">
-                    <div class="destination__info">
-                        <h2 class="destination__title">Zion Canyon</h2>
-                        <a class="destination__like-button link-transition" href=""><img src="./images/like-button.svg"
-                                alt="heart shaped button"></a>
-                    </div>
-                </article>
-                <article class="destination">
-                    <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park in Utah">
-                    <div class="destination__info">
-                        <h2 class="destination__title">Zion Canyon</h2>
-                        <a class="destination__like-button link-transition" href=""><img src="./images/like-button.svg"
-                                alt="heart shaped button"></a>
-                    </div>
-                </article>
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer__copyright">&#169; 2021 Around The U.S.</p>
-        </footer>
-    </body>
-
-</html>
+                <p class="profile__about-me" id="profile-title">explorer</p>
+            </div>
+            </a>
+            </div>
+            <button class="profile__card-button button"></button>
+        </section>
+        <section class="destinations">
+            <article class="destination">
+                <img class="destination__image" src="./images/Yosemite-valley.jpg" alt="Yosemite national park">
+                <div class="destination__info">
+                    <h2 class="destination__title">yosemite valley</h2>
+                    <button class="destination__like-button button"></button>
+                </div>
+            </article>
+            <article class="destination">
+                <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park">
+                <div class="destination__info">
+                    <h2 class="destination__title">zion canyon</h2>
+                    <button class="destination__like-button button"></button>
+                </div>
+            </article>
+            <article class="destination">
+                <img class="destination__image" src="./images/telluride.jpg" alt="Telluride, Colorado">
+                <div class="destination__info">
+                    <h2 class="destination__title">telluride</h2>
+                    <button class="destination__like-button button"></button>
+                </div>
+            </article>
+            <article class="destination">
+                <img class="destination__image" src="./images/yellowstone.jpg" alt="Yellowstone National Park">
+                <div class="destination__info">
+                    <h2 class="destination__title">yellowstone</h2>
+                    <button class="destination__like-button button"></button>
+                </div>
+            </article>
+            <article class="destination">
+                <img class="destination__image" src="./images/bass-harbor.jpg" alt="Bass Harbor, Maine">
+                <div class="destination__info">
+                    <h2 class="destination__title">bass harbor</h2>
+                    <button class="destination__like-button button"></button>
+                </div>
+            </article>
+            <article class="destination">
+                <img class="destination__image" src="./images/big-bend.jpg" alt="Big Bend national park">
+                <div class="destination__info">
+                    <h2 class="destination__title">big bend</h2>
+                    <button class="destination__like-button button"></button>
+                </div>
+            </article>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">&#169; 2021 Around The U.S.</p>
+    </footer>
+    <script src="scripts/index.js" type="text/javascript"></script>
 </body>
 
 </html>
