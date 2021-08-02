@@ -1,16 +1,15 @@
-# Project 4: Around The U.S.
+# [Project 4: Around The U.S.](https://braxtontr1.github.io/web_project_4/)
 
-### Overview
+## Overview
 
-* Figma
-* Images
+A responsive website that allows users to customize the site to be about their travels.
 
-**Figma**
+## Purpose
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+* The website was created to allow me to experiment with javascript
 
-**Images**
+* The website will have features that will allow me to grow my knowlege of javascript further.
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+### Issues and Fixes
 
-Have fun with JavaScript!
+The website does not currently allow for much customization. As my knowledge of javascript deepens, the website will be fully functional.
