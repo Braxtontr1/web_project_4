@@ -3,3 +3,11 @@
     font-size: 24px;
     margin: 34px 0 54px;
 }
+
+@media screen and (max-width: 750px) {
+    .form__heading {
+        margin: 25px 0 76px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

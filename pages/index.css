@@ -19,9 +19,7 @@
 @import url('../blocks/modal/__close-button/modal__close-button.css');
 @import url('../blocks/form/form.css');
 @import url('../blocks/form/__heading/form__heading.css');
-@import url('../blocks/form/__item/form__item.css');
-@import url('../blocks/form/__name/form__name.css');
-@import url('../blocks/form/__about-me/form__about-me.css');
+@import url('../blocks/form/__input/form__input.css');
 @import url('../blocks/form/__button/form__button.css');
 @import url('../blocks/destinations/destinations.css');
 @import url('../blocks/destination/destination.css');

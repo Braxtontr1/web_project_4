@@ -8,11 +8,16 @@
     font-weight: normal;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 880px) {
     .profile__about-me {
         text-align: center;
+        padding-top: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile__about-me {
         font-size: 14px;
         line-height: 17px;
-        padding-top: 14px;
     }
 }
