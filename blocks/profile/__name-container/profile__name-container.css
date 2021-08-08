@@ -1,6 +1,11 @@
 .profile__name-container {
     display: flex;
-    /* align-items: baseline; */
     max-width: 415px;
     width: 100%;
+}
+
+@media screen and (max-width: 880px) {
+    .profile__name-container {
+        margin-top: 30px;
+    }
 }
