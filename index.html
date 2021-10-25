@@ -10,22 +10,54 @@
 </head>
 
 <body class="page">
-    <div class="modal">
+    <div class="modal modal_type_edit-profile">
 
         <div class="modal__box">
             <button class="modal__close-button button" type="button" name="close button" id="modal-close"></button>
-            <form class="form" name="edit-profile">
+            <form class="form js-edit-form" name="edit-profile">
                 <h2 class="form__heading">Edit Profile</h2>
-                <input class="form__input" id="modal-name-input" type="text" name="name" placeholder="jacques cousteau"
-                    required>
-                <input class="form__input" id="modal-title-input" type="text" name="title" placeholder="explorer"
-                    required>
+                <input class="form__input js-form-input_type_name" type="text" name="name"
+                    placeholder="jacques cousteau" required>
+                <input class="form__input js-form-input_type_description" type="text" name="title"
+                    placeholder="explorer" required>
                 <button class="form__button button" id="form__save-button" type="submit" name="save button"
                     value="save">save</button>
             </form>
 
         </div>
     </div>
+    <div class="modal modal_type_add-card">
+        <div class="modal__box">
+            <button class="modal__close-button button" type="button" name="close button" id="modal-close"></button>
+            <form class="form js-card-form" name="edit-profile">
+                <h2 class="form__heading">New Place</h2>
+                <input class="form__input form-input_type_title" type="text" name="title" placeholder="Title" required>
+                <input class="form__input form-input_type_image-link" type="text" name="image" placeholder="Image Link"
+                    required>
+                <button class="form__button button" id="form__save-button" type="submit" name="save button"
+                    value="save">Create</button>
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <div class="modal modal_type_image">
+
+        <div class="modal__box modal__box_type_image">
+            <button class="modal__close-button js-image-close" type="button" name="close button"
+                id="modal-close"></button>
+            <img class="modal__image" src="" alt="">
+            <div>
+                <p class="modal__image-title"></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
     <header class="header">
         <img class="header__image" src="./images/around-the-us.svg" alt="Around The U.S.">
     </header>
@@ -44,53 +76,22 @@
             <button type="button" name="card edit button" class="profile__card-button button"></button>
         </section>
         <section class="destinations">
-            <article class="destination">
-                <img class="destination__image" src="./images/Yosemite-valley.jpg" alt="Yosemite national park">
-                <div class="destination__info">
-                    <h2 class="destination__title">yosemite valley</h2>
-                    <button class="destination__like-button button" type="button" name="like button"></button>
-                </div>
-            </article>
-            <article class="destination">
-                <img class="destination__image" src="./images/zion-canyon.jpg" alt="Zion national park">
-                <div class="destination__info">
-                    <h2 class="destination__title">zion canyon</h2>
-                    <button class="destination__like-button button" type="button" name="like button"></button>
-                </div>
-            </article>
-            <article class="destination">
-                <img class="destination__image" src="./images/telluride.jpg" alt="Telluride, Colorado">
-                <div class="destination__info">
-                    <h2 class="destination__title">telluride</h2>
-                    <button class="destination__like-button button" type="button" name="like button"></button>
-                </div>
-            </article>
-            <article class="destination">
-                <img class="destination__image" src="./images/yellowstone.jpg" alt="Yellowstone National Park">
-                <div class="destination__info">
-                    <h2 class="destination__title">yellowstone</h2>
-                    <button class="destination__like-button button" type="button" name="like button"></button>
-                </div>
-            </article>
-            <article class="destination">
-                <img class="destination__image" src="./images/bass-harbor.jpg" alt="Bass Harbor, Maine">
-                <div class="destination__info">
-                    <h2 class="destination__title">bass harbor</h2>
-                    <button class="destination__like-button button" type="button" name="like button"></button>
-                </div>
-            </article>
-            <article class="destination">
-                <img class="destination__image" src="./images/big-bend.jpg" alt="Big Bend national park">
-                <div class="destination__info">
-                    <h2 class="destination__title">big bend</h2>
-                    <button class="destination__like-button button" type="button" name="like button"></button>
-                </div>
-            </article>
         </section>
     </main>
     <footer class="footer">
         <p class="footer__copyright">&#169; 2021 Around The U.S.</p>
     </footer>
+    <template id="destination-template">
+        <article class="destination">
+            <button class="destination__delete-button button"></button>
+            <div class="destination__image">
+            </div>
+            <div class="destination__info">
+                <h2 class="destination__title"></h2>
+                <button class=" destination__like-button button" type="button" name="like button"></button>
+            </div>
+        </article>
+    </template>
     <script src="scripts/index.js"></script>
 </body>
 

@@ -1,6 +1,7 @@
 .modal_open {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+    transition-delay: 0s;
+    transition: opacity 1;
 }

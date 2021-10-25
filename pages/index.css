@@ -14,9 +14,13 @@
 @import url('../blocks/profile/__about-me/profile__about-me.css');
 @import url('../blocks/profile/__card-button/profile__card-button.css');
 @import url('../blocks/modal/modal.css');
+@import url('../blocks/modal/_type/_image/modal_type_image.css');
 @import url('../blocks/modal/_open/modal_open.css');
 @import url('../blocks/modal/__box/modal__box.css');
+@import url('../blocks/modal/__box/_type/_image/modal__box_type_image.css');
+@import url('../blocks/modal/__image/modal__image.css');
 @import url('../blocks/modal/__close-button/modal__close-button.css');
+@import url('../blocks/modal/__image-title/modal__image-title.css');
 @import url('../blocks/form/form.css');
 @import url('../blocks/form/__heading/form__heading.css');
 @import url('../blocks/form/__input/form__input.css');
@@ -27,5 +31,7 @@
 @import url('../blocks/destination/__info/destination__info.css');
 @import url('../blocks/destination/__title/destination__title.css');
 @import url('../blocks/destination/__like-button/destination__like-button.css');
+@import url('../blocks/destination/__like-button/_active/destination__like-button_active.css');
+@import url('../blocks/destination/__delete-button/destination__delete-button.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
