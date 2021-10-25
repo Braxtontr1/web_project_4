@@ -44,13 +44,13 @@ const previewModalTitle = previewModal.querySelector('.modal__image-title');
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
-const modalNameInput = document.querySelector('.js-form-input_type_name');
-const modalDescriptionInput = document.querySelector('.js-form-input_type_description');
+const modalNameInput = document.querySelector('.form__input_type_name');
+const modalDescriptionInput = document.querySelector('.form__input_type_description');
 
 const cardTitle = document.querySelector('.destination__title');
 const cardImage = document.querySelector('.destination__image');
-const modalCardTitle = document.querySelector('.form-input_type_title');
-const modalImageLink = document.querySelector('.form-input_type_image-link');
+const modalCardTitle = document.querySelector('.form__input_type_title');
+const modalImageLink = document.querySelector('.form__input_type_image-link');
 
 
 
