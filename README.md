@@ -13,3 +13,13 @@ A responsive website that allows users to customize the site to be about their t
 ### Issues and Fixes
 
 The website does not currently allow for much customization. As my knowledge of javascript deepens, the website will be fully functional.
+
+### Technologies Used
+
+* HTML5
+* CSS3
+* Javascript
+
+### File Structure
+
+For the purpose of organisation BEM methodology with a nested file structure was used.
