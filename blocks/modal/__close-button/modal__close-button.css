@@ -11,7 +11,7 @@
     top: -40px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .modal__close-button {
         background-repeat: no-repeat;
         background-image: url('../../../images/close-button_small.svg');

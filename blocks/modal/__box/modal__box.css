@@ -7,7 +7,7 @@
     border-radius: 10px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .modal__box {
         width: 282px;
     }
