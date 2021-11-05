@@ -57,8 +57,8 @@ const modalImageLink = document.querySelector('.form__input_type_image-link');
 // // functions
 
 function prefillEditProfileForm() {
-    modalNameInput.value = profileName.textContent;
-    modalDescriptionInput.value = profileTitle.textContent;
+        modalNameInput.value = profileName.textContent;
+        modalDescriptionInput.value = profileTitle.textContent;
 }
 
 function openModalWindow(modalWindow) {
@@ -82,7 +82,6 @@ function previewImage(card) {
     previewModalTitle.textContent = card.title;
     openModalWindow(previewModal);
 }
-
 
 function generateCard(card) {
 
@@ -108,7 +107,7 @@ function generateCard(card) {
 
 
     return cardEl;
-};
+}
 
 function addFormSubmitHandler(evt) {
     evt.preventDefault();
@@ -118,8 +117,9 @@ function addFormSubmitHandler(evt) {
     };
     const cardEl = generateCard(card);
     destinations.prepend(cardEl);
+    closeModalWindow(addModal);
     addForm.reset();
-};
+}
 
 // Event Listeners
 
