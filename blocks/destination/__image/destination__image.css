@@ -7,4 +7,5 @@
     border-top-right-radius: 10px;
     justify-content: right;
     background-size: cover;
+    cursor: pointer;
 }

@@ -38,8 +38,9 @@ const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
 const editModalCloseButton = editModal.querySelector('.modal__close-button');
 const addModalCloseButton = addModal.querySelector('.modal__close-button');
-
 const previewModalCloseButton = previewModal.querySelector('.modal__close-button');
+const addModalSubmitButton = addForm.querySelector('.form__button');
+
 const previewModalImage = previewModal.querySelector('.modal__image');
 const previewModalTitle = previewModal.querySelector('.modal__image-title');
 
@@ -62,12 +63,25 @@ function prefillEditProfileForm() {
     modalDescriptionInput.value = profileTitle.textContent;
 }
 
+function escapeModalWindow(evt) {
+    if (evt.key === 'Escape') {
+        const openedModal = document.querySelector('.modal_open')
+        closeModalWindow(openedModal); 
+        };
+    };
+
+function stopEscapeModalListener() {
+    document.removeEventListener('keydown', escapeModalWindow);
+}
+
 function openModalWindow(modalWindow) {
     modalWindow.classList.add('modal_open');
+    document.addEventListener('keydown', escapeModalWindow);
 }
 
 function closeModalWindow(modalWindow) {
     modalWindow.classList.remove('modal_open');
+    stopEscapeModalListener();
 }
 
 function editFormSubmitHandler(evt) {
@@ -77,7 +91,7 @@ function editFormSubmitHandler(evt) {
     closeModalWindow(editModal);
 }
 
-function previewImage(card) {
+function openPreviewImage(card) {
     previewModalImage.src = card.image;
     previewModalImage.alt = card.title;
     previewModalTitle.textContent = card.title;
@@ -100,7 +114,7 @@ function generateCard(card) {
         cardDelete.remove();
     });
 
-    cardImage.addEventListener('click', () => previewImage(card));
+    cardImage.addEventListener('click', () => openPreviewImage(card));
 
     likeButton.addEventListener('click', function (evt) {
         evt.target.classList.toggle('destination__like-button_active');
@@ -120,26 +134,14 @@ function addFormSubmitHandler(evt) {
     destinations.prepend(cardEl);
     closeModalWindow(addModal);
     addForm.reset();
+    addModalSubmitButton.classList.add('form__button_disabled');
 }
-
-function escapeModalWindow(evt) {
-    if (evt.key === 'Escape') {
-        document.querySelectorAll('.modal').forEach((item) => {
-            closeModalWindow(item);
-        });
-    };
-};
 
 function closeModalOverlay(evt) {
     if (evt.target.classList.contains('modal')) {
         closeModalWindow(evt.target);
     };
-
-
 };
-
-
-// Event Listeners
 
 editForm.addEventListener('submit', editFormSubmitHandler);
 editModalButton.addEventListener('click', () => {
@@ -162,7 +164,6 @@ editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal)
 previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
 
 
-page.addEventListener('keydown', escapeModalWindow);
 // // actions
 
 initialCards.forEach((card) => {
