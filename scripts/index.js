@@ -27,6 +27,7 @@ const initialCards = [{
 const destinationTemplate = document.querySelector('#destination-template').content.querySelector('.destination');
 const destinations = document.querySelector('.destinations');
 
+const page = document.querySelector('.page');
 const editModal = document.querySelector('.modal_type_edit-profile');
 const editForm = editModal.querySelector('.form');
 const addModal = document.querySelector('.modal_type_add-card');
@@ -57,8 +58,8 @@ const modalImageLink = document.querySelector('.form__input_type_image-link');
 // // functions
 
 function prefillEditProfileForm() {
-        modalNameInput.value = profileName.textContent;
-        modalDescriptionInput.value = profileTitle.textContent;
+    modalNameInput.value = profileName.textContent;
+    modalDescriptionInput.value = profileTitle.textContent;
 }
 
 function openModalWindow(modalWindow) {
@@ -121,6 +122,23 @@ function addFormSubmitHandler(evt) {
     addForm.reset();
 }
 
+function escapeModalWindow(evt) {
+    if (evt.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach((item) => {
+            closeModalWindow(item);
+        });
+    };
+};
+
+function closeModalOverlay(evt) {
+    if (evt.target.classList.contains('modal')) {
+        closeModalWindow(evt.target);
+    };
+
+
+};
+
+
 // Event Listeners
 
 editForm.addEventListener('submit', editFormSubmitHandler);
@@ -128,14 +146,23 @@ editModalButton.addEventListener('click', () => {
     prefillEditProfileForm(editModal);
     openModalWindow(editModal);
 });
-editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal));
+
+
+editModal.addEventListener('click', closeModalOverlay);
+addModal.addEventListener('click', closeModalOverlay);
+previewModal.addEventListener('click', closeModalOverlay);
+
 
 addForm.addEventListener('submit', addFormSubmitHandler);
 addModalButton.addEventListener('click', () => openModalWindow(addModal));
-addModalCloseButton.addEventListener('click', () => closeModalWindow(addModal));
 
+
+addModalCloseButton.addEventListener('click', () => closeModalWindow(addModal));
+editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal));
 previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
 
+
+page.addEventListener('keydown', escapeModalWindow);
 // // actions
 
 initialCards.forEach((card) => {
