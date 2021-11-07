@@ -84,3 +84,7 @@ enableValidation({
     inputErrorClass: "form__input_type_error",
     errorClass: "form__error_visible",
 });
+
+export const toggleButtonState = () => {
+    ...
+}

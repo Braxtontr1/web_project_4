@@ -1,3 +1,7 @@
+import {
+    toggleButtonState
+} from './validate'
+
 const initialCards = [{
         title: "Yosemite Valley",
         image: "./images/Yosemite-valley.jpg"
@@ -66,9 +70,9 @@ function prefillEditProfileForm() {
 function escapeModalWindow(evt) {
     if (evt.key === 'Escape') {
         const openedModal = document.querySelector('.modal_open')
-        closeModalWindow(openedModal); 
-        };
-    };
+        closeModalWindow(openedModal);
+    }
+}
 
 function stopEscapeModalListener() {
     document.removeEventListener('keydown', escapeModalWindow);
@@ -129,25 +133,25 @@ function addFormSubmitHandler(evt) {
     const card = {
         title: modalCardTitle.value,
         image: modalImageLink.value,
-    };
+    }
     const cardEl = generateCard(card);
     destinations.prepend(cardEl);
     closeModalWindow(addModal);
     addForm.reset();
-    addModalSubmitButton.classList.add('form__button_disabled');
+    toggleButtonState();
 }
 
 function closeModalOverlay(evt) {
     if (evt.target.classList.contains('modal')) {
         closeModalWindow(evt.target);
-    };
-};
+    }
+}
 
 editForm.addEventListener('submit', editFormSubmitHandler);
 editModalButton.addEventListener('click', () => {
     prefillEditProfileForm(editModal);
     openModalWindow(editModal);
-});
+})
 
 
 editModal.addEventListener('click', closeModalOverlay);
