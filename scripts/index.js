@@ -1,6 +1,6 @@
 import {
     toggleButtonState
-} from './validate.js'
+} from './validate'
 
 const initialCards = [{
         title: "Yosemite Valley",
@@ -31,6 +31,7 @@ const initialCards = [{
 const destinationTemplate = document.querySelector('#destination-template').content.querySelector('.destination');
 const destinations = document.querySelector('.destinations');
 
+const page = document.querySelector('.page');
 const editModal = document.querySelector('.modal_type_edit-profile');
 const editForm = editModal.querySelector('.form');
 const addModal = document.querySelector('.modal_type_add-card');
