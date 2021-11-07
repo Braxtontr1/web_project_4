@@ -1,6 +1,6 @@
 import {
     toggleButtonState
-} from './validate.js';
+} from './validate'
 
 const initialCards = [{
         title: "Yosemite Valley",
