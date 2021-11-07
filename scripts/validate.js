@@ -29,7 +29,7 @@ const checkInputValidity = (formEl, inputEl, settings) => {
 };
 
 
-const toggleButtonState = (inputList, buttonEl, {
+export const toggleButtonState = (inputList, buttonEl, {
     inactiveButtonClass
 }) => {
     const allValid = inputList.every(inputEl => isValid(inputEl));
@@ -84,7 +84,3 @@ enableValidation({
     inputErrorClass: "form__input_type_error",
     errorClass: "form__error_visible",
 });
-
-export const toggleButtonState = () => {
-    ...
-}
