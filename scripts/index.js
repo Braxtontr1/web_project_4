@@ -1,6 +1,6 @@
 import {
     toggleButtonState
-} from './validate'
+} from './validate.js';
 
 const initialCards = [{
         title: "Yosemite Valley",
@@ -138,7 +138,6 @@ function addFormSubmitHandler(evt) {
     destinations.prepend(cardEl);
     closeModalWindow(addModal);
     addForm.reset();
-    toggleButtonState();
 }
 
 function closeModalOverlay(evt) {
