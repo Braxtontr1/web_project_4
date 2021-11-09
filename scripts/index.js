@@ -138,7 +138,9 @@ function addFormSubmitHandler(evt) {
     destinations.prepend(cardEl);
     closeModalWindow(addModal);
     addForm.reset();
-    toggleButtonState();
+    toggleButtonState(inputList, buttonEl, {
+        inactiveButtonClass
+    });
 }
 
 function closeModalOverlay(evt) {
