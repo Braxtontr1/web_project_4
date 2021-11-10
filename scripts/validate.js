@@ -29,7 +29,7 @@ const checkInputValidity = (formEl, inputEl, settings) => {
 };
 
 
-export const toggleButtonState = (inputList, buttonEl, {
+const toggleButtonState = (inputList, buttonEl, {
     inactiveButtonClass
 }) => {
     const allValid = inputList.every(inputEl => isValid(inputEl));
@@ -74,6 +74,15 @@ const enableValidation = ({
         setupEventListners(formEl, otherSettings);
     });
 };
+
+function resetForm(formEl, settings) {
+    const buttonEl = formEl.querySelector(settings.submitButtonSelector);
+
+    buttonEl.disabled = true;
+    buttonEl.classList.add(settings.inactiveButtonClass);
+
+    formEl.reset();
+}
 
 
 enableValidation({

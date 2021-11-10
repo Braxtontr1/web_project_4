@@ -1,7 +1,3 @@
-import {
-    toggleButtonState
-} from './validate'
-
 const initialCards = [{
         title: "Yosemite Valley",
         image: "./images/Yosemite-valley.jpg"
@@ -44,6 +40,8 @@ const editModalCloseButton = editModal.querySelector('.modal__close-button');
 const addModalCloseButton = addModal.querySelector('.modal__close-button');
 const previewModalCloseButton = previewModal.querySelector('.modal__close-button');
 const addModalSubmitButton = addForm.querySelector('.form__button');
+const modalButtonDisabled = addForm.querySelector('.form__button_disabled');
+
 
 const previewModalImage = previewModal.querySelector('.modal__image');
 const previewModalTitle = previewModal.querySelector('.modal__image-title');
@@ -137,9 +135,9 @@ function addFormSubmitHandler(evt) {
     const cardEl = generateCard(card);
     destinations.prepend(cardEl);
     closeModalWindow(addModal);
-    addForm.reset();
-    toggleButtonState(inputList, buttonEl, {
-        inactiveButtonClass
+    resetForm(addForm, {
+        submitButtonSelector: ".form__button",
+        inactiveButtonClass: "form__button_disabled",
     });
 }
 
