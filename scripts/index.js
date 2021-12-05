@@ -1,3 +1,10 @@
+import FormValidator from "./FormValidator.js";
+import Card from "./Card.js";
+import {
+    openModalWindow,
+    closeModalWindow
+} from "./Utils.js";
+
 const initialCards = [{
         title: "Yosemite Valley",
         image: "./images/Yosemite-valley.jpg"
@@ -36,15 +43,8 @@ const previewModal = document.querySelector('.modal_type_image');
 
 const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
-const editModalCloseButton = editModal.querySelector('.modal__close-button');
-const addModalCloseButton = addModal.querySelector('.modal__close-button');
-const previewModalCloseButton = previewModal.querySelector('.modal__close-button');
 const addModalSubmitButton = addForm.querySelector('.form__button');
 const modalButtonDisabled = addForm.querySelector('.form__button_disabled');
-
-
-const previewModalImage = previewModal.querySelector('.modal__image');
-const previewModalTitle = previewModal.querySelector('.modal__image-title');
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
@@ -65,25 +65,9 @@ function prefillEditProfileForm() {
     modalDescriptionInput.value = profileTitle.textContent;
 }
 
-function escapeModalWindow(evt) {
-    if (evt.key === 'Escape') {
-        const openedModal = document.querySelector('.modal_open')
-        closeModalWindow(openedModal);
-    }
-}
-
-function stopEscapeModalListener() {
-    document.removeEventListener('keydown', escapeModalWindow);
-}
-
-function openModalWindow(modalWindow) {
-    modalWindow.classList.add('modal_open');
-    document.addEventListener('keydown', escapeModalWindow);
-}
-
-function closeModalWindow(modalWindow) {
-    modalWindow.classList.remove('modal_open');
-    stopEscapeModalListener();
+function renderCard(data, placesList) {
+    const card = new Card(data, '#destination-template').generateCard();
+    placesList.append(card);
 }
 
 function editFormSubmitHandler(evt) {
@@ -93,52 +77,26 @@ function editFormSubmitHandler(evt) {
     closeModalWindow(editModal);
 }
 
-function openPreviewImage(card) {
-    previewModalImage.src = card.image;
-    previewModalImage.alt = card.title;
-    previewModalTitle.textContent = card.title;
-    openModalWindow(previewModal);
-}
+function formReset(formEl) {
 
-function generateCard(card) {
+    const buttonEl = formEl.querySelector('.form__button');
 
-    const cardEl = destinationTemplate.cloneNode(true);
-    const cardImage = cardEl.querySelector('.destination__image');
-    const deleteBttn = cardEl.querySelector('.destination__delete-button');
-    const likeButton = cardEl.querySelector('.destination__like-button');
+    buttonEl.disabled = true;
+    buttonEl.classList.add(formSettings.inactiveButtonClass);
 
-    cardEl.querySelector('.destination__title').textContent = card.title;
-    cardEl.querySelector('.destination__image').src = card.image;
-    cardEl.querySelector('.destination__image').alt = card.title;
-
-    deleteBttn.addEventListener('click', function () {
-        const cardDelete = deleteBttn.closest('.destination');
-        cardDelete.remove();
-    });
-
-    cardImage.addEventListener('click', () => openPreviewImage(card));
-
-    likeButton.addEventListener('click', function (evt) {
-        evt.target.classList.toggle('destination__like-button_active');
-    });
-
-
-    return cardEl;
+    formEl.reset();
 }
 
 function addFormSubmitHandler(evt) {
     evt.preventDefault();
-    const card = {
+    const addCardData = {
         title: modalCardTitle.value,
         image: modalImageLink.value,
     }
-    const cardEl = generateCard(card);
+    const cardEl = new Card(addCardData, '#destination-template').generateCard();
     destinations.prepend(cardEl);
     closeModalWindow(addModal);
-    resetForm(addForm, {
-        submitButtonSelector: ".form__button",
-        inactiveButtonClass: "form__button_disabled",
-    });
+    formReset(addForm);
 }
 
 function closeModalOverlay(evt) {
@@ -163,14 +121,23 @@ addForm.addEventListener('submit', addFormSubmitHandler);
 addModalButton.addEventListener('click', () => openModalWindow(addModal));
 
 
-addModalCloseButton.addEventListener('click', () => closeModalWindow(addModal));
-editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal));
-previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
-
-
 // // actions
 
-initialCards.forEach((card) => {
-    cardEl = generateCard(card);
-    destinations.append(cardEl);
+initialCards.forEach((data) => {
+    renderCard(data, destinations);
 });
+
+const formSettings = {
+    formSelector: ".form",
+    inputSelector: ".form__input",
+    submitButtonSelector: ".form__button",
+    inactiveButtonClass: "form__button_disabled",
+    inputErrorClass: "form__input_type_error",
+    errorClass: "form__error_visible",
+}
+
+const editFormValidator = new FormValidator(formSettings, editForm);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(formSettings, addForm);
+addFormValidator.enableValidation();
