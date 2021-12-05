@@ -27,6 +27,10 @@ class FormValidator {
         return inputEl.validity.valid;
     }
 
+    _checkButtonState() {
+        return this._inputList.every(inputEl => this._isValid(inputEl));
+    }
+
     _checkInputValidity(inputEl) {
         if (!this._isValid(inputEl)) {
             this._addErrorMessage(inputEl);
@@ -35,9 +39,8 @@ class FormValidator {
         }
     }
 
-    _toggleButtonState(inputList) {
-        const allValid = inputList.every(inputEl => this._isValid(inputEl));
-        if (allValid) {
+    _toggleButtonState() {
+        if (this._checkButtonState()) {
             this._buttonEl.classList.remove(this._inactiveButtonClass);
             this._buttonEl.disabled = false;
         } else {

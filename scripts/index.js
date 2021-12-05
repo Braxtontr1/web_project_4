@@ -31,10 +31,9 @@ const initialCards = [{
     }
 ];
 
-const destinationTemplate = document.querySelector('#destination-template').content.querySelector('.destination');
+
 const destinations = document.querySelector('.destinations');
 
-const page = document.querySelector('.page');
 const editModal = document.querySelector('.modal_type_edit-profile');
 const editForm = editModal.querySelector('.form');
 const addModal = document.querySelector('.modal_type_add-card');
@@ -43,16 +42,12 @@ const previewModal = document.querySelector('.modal_type_image');
 
 const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
-const addModalSubmitButton = addForm.querySelector('.form__button');
-const modalButtonDisabled = addForm.querySelector('.form__button_disabled');
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
 const modalNameInput = document.querySelector('.form__input_type_name');
 const modalDescriptionInput = document.querySelector('.form__input_type_description');
 
-const cardTitle = document.querySelector('.destination__title');
-const cardImage = document.querySelector('.destination__image');
 const modalCardTitle = document.querySelector('.form__input_type_title');
 const modalImageLink = document.querySelector('.form__input_type_image-link');
 
@@ -111,6 +106,7 @@ editModalButton.addEventListener('click', () => {
     openModalWindow(editModal);
 })
 
+addModalButton.addEventListener('click', () => openModalWindow(addModal));
 
 editModal.addEventListener('click', closeModalOverlay);
 addModal.addEventListener('click', closeModalOverlay);

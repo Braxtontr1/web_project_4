@@ -1,25 +1,9 @@
+import { closeModalWindow, escapeModalWindow } from "./Utils.js";
+
 const previewModal = document.querySelector('.modal_type_image');
 const previewModalImage = previewModal.querySelector('.modal__image');
 const previewModalTitle = previewModal.querySelector('.modal__image-title');
-const modalCardTitle = document.querySelector('.form__input_type_title');
-const modalImageLink = document.querySelector('.form__input_type_image-link');
 const previewModalCloseButton = previewModal.querySelector('.modal__close-button');
-
-function escapeModalWindow(evt) {
-    if (evt.key === 'Escape') {
-        const openedModal = document.querySelector('.modal_open')
-        closeModalWindow(openedModal);
-    }
-}
-
-function stopEscapeModalListener() {
-    document.removeEventListener('keydown', escapeModalWindow);
-}
-
-function closeModalWindow(modalWindow) {
-    modalWindow.classList.remove('modal_open');
-    stopEscapeModalListener();
-}
 
 class Card {
     constructor(data, cardSelector) {
@@ -43,6 +27,7 @@ class Card {
 
     _handleDelete() {
         this._element.remove();
+        this._element = null;
     }
 
     _handlePreviewImage() {
@@ -60,15 +45,18 @@ class Card {
         this._element.querySelector('.destination__image').addEventListener('click', () => this._handlePreviewImage());
 
         this._element.querySelector('.destination__delete-button').addEventListener('click', () => this._handleDelete());
+
+        previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
     }
 
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
 
+        this._cardElementImage = this._element.querySelector('.destination__image');
         this._element.querySelector('.destination__title').textContent = this._title;
-        this._element.querySelector('.destination__image').src = this._image;
-        this._element.querySelector('.destination__image').alt = this._title;
+        this._cardElementImage.src = this._image;
+        this._cardElementImage.alt = this._title;
 
         return this._element;
     }

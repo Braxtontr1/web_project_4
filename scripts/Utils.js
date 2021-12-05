@@ -1,12 +1,8 @@
 const addModal = document.querySelector('.modal_type_add-card');
 const editModal = document.querySelector('.modal_type_edit-profile');
-const previewModal = document.querySelector('.modal_type_image');
 
 const editModalCloseButton = editModal.querySelector('.modal__close-button');
 const addModalCloseButton = addModal.querySelector('.modal__close-button');
-const previewModalCloseButton = previewModal.querySelector('.modal__close-button');
-const editModalButton = document.querySelector('.profile__button');
-const addModalButton = document.querySelector('.profile__card-button');
 
 function escapeModalWindow(evt) {
     if (evt.key === 'Escape') {
@@ -29,10 +25,7 @@ function closeModalWindow(modalWindow) {
     stopEscapeModalListener();
 }
 
-addModalButton.addEventListener('click', () => openModalWindow(addModal));
-
 addModalCloseButton.addEventListener('click', () => closeModalWindow(addModal));
 editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal));
-previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
 
-export {openModalWindow, closeModalWindow}
+export {openModalWindow, closeModalWindow, escapeModalWindow}
