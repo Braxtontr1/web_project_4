@@ -1,9 +1,14 @@
-import { closeModalWindow, escapeModalWindow } from "./Utils.js";
+import {
+    closeModalWindow,
+    openModalWindow
+} from "./Utils.js";
 
 const previewModal = document.querySelector('.modal_type_image');
 const previewModalImage = previewModal.querySelector('.modal__image');
 const previewModalTitle = previewModal.querySelector('.modal__image-title');
 const previewModalCloseButton = previewModal.querySelector('.modal__close-button');
+
+previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
 
 class Card {
     constructor(data, cardSelector) {
@@ -15,14 +20,14 @@ class Card {
 
     _getTemplate() {
         const cardElement =
-         document.querySelector(this._cardSelector)
-        .content.querySelector('.destination').cloneNode(true);
+            document.querySelector(this._cardSelector)
+            .content.querySelector('.destination').cloneNode(true);
         return cardElement;
     }
 
     _handleLike() {
         this._element.querySelector('.destination__like-button')
-        .classList.toggle('destination__like-button_active');
+            .classList.toggle('destination__like-button_active');
     }
 
     _handleDelete() {
@@ -35,8 +40,7 @@ class Card {
         previewModalImage.alt = this._title;
         previewModalTitle.textContent = this._title;
 
-        previewModal.classList.add('modal_open');
-        document.addEventListener('keydown', escapeModalWindow);
+        openModalWindow(previewModal);
     }
 
     _setEventListeners() {
@@ -45,18 +49,17 @@ class Card {
         this._element.querySelector('.destination__image').addEventListener('click', () => this._handlePreviewImage());
 
         this._element.querySelector('.destination__delete-button').addEventListener('click', () => this._handleDelete());
-
-        previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
     }
 
     generateCard() {
         this._element = this._getTemplate();
         this._setEventListeners();
 
-        this._cardElementImage = this._element.querySelector('.destination__image');
         this._element.querySelector('.destination__title').textContent = this._title;
-        this._cardElementImage.src = this._image;
-        this._cardElementImage.alt = this._title;
+
+        const cardElementImage = this._element.querySelector('.destination__image');
+        cardElementImage.src = this._image;
+        cardElementImage.alt = this._title;
 
         return this._element;
     }

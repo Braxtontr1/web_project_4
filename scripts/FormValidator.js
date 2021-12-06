@@ -27,7 +27,7 @@ class FormValidator {
         return inputEl.validity.valid;
     }
 
-    _checkButtonState() {
+    _checkFormValidity() {
         return this._inputList.every(inputEl => this._isValid(inputEl));
     }
 
@@ -40,7 +40,7 @@ class FormValidator {
     }
 
     _toggleButtonState() {
-        if (this._checkButtonState()) {
+        if (this._checkFormValidity()) {
             this._buttonEl.classList.remove(this._inactiveButtonClass);
             this._buttonEl.disabled = false;
         } else {

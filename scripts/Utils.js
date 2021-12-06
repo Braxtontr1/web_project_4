@@ -1,9 +1,3 @@
-const addModal = document.querySelector('.modal_type_add-card');
-const editModal = document.querySelector('.modal_type_edit-profile');
-
-const editModalCloseButton = editModal.querySelector('.modal__close-button');
-const addModalCloseButton = addModal.querySelector('.modal__close-button');
-
 function escapeModalWindow(evt) {
     if (evt.key === 'Escape') {
         const openedModal = document.querySelector('.modal_open')
@@ -25,7 +19,7 @@ function closeModalWindow(modalWindow) {
     stopEscapeModalListener();
 }
 
-addModalCloseButton.addEventListener('click', () => closeModalWindow(addModal));
-editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal));
-
-export {openModalWindow, closeModalWindow, escapeModalWindow}
+export {
+    openModalWindow,
+    closeModalWindow,
+}

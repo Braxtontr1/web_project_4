@@ -42,6 +42,8 @@ const previewModal = document.querySelector('.modal_type_image');
 
 const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
+const editModalCloseButton = editModal.querySelector('.modal__close-button'); 
+const addModalCloseButton = addModal.querySelector('.modal__close-button'); 
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
@@ -107,6 +109,8 @@ editModalButton.addEventListener('click', () => {
 })
 
 addModalButton.addEventListener('click', () => openModalWindow(addModal));
+addModalCloseButton.addEventListener('click', () => closeModalWindow(addModal));
+editModalCloseButton.addEventListener('click', () => closeModalWindow(editModal));
 
 editModal.addEventListener('click', closeModalOverlay);
 addModal.addEventListener('click', closeModalOverlay);
