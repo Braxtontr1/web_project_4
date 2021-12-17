@@ -11,11 +11,12 @@ const previewModalCloseButton = previewModal.querySelector('.modal__close-button
 previewModalCloseButton.addEventListener('click', () => closeModalWindow(previewModal));
 
 class Card {
-    constructor(data, cardSelector) {
+    constructor({data, handleClick}, cardSelector) {
         this._title = data.title;
         this._image = data.image;
 
         this._cardSelector = cardSelector;
+        this._handleClick = handleClick;
     }
 
     _getTemplate() {
@@ -35,18 +36,10 @@ class Card {
         this._element = null;
     }
 
-    _handlePreviewImage() {
-        previewModalImage.src = this._image;
-        previewModalImage.alt = this._title;
-        previewModalTitle.textContent = this._title;
-
-        openModalWindow(previewModal);
-    }
-
     _setEventListeners() {
         this._element.querySelector('.destination__like-button').addEventListener('click', () => this._handleLike());
 
-        this._element.querySelector('.destination__image').addEventListener('click', () => this._handlePreviewImage());
+        this._element.querySelector('.destination__image').addEventListener('click', () => this._handleClick({title: this._title, image: this._image}));
 
         this._element.querySelector('.destination__delete-button').addEventListener('click', () => this._handleDelete());
     }
