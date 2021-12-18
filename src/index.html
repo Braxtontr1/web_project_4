@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Around The U.S.</title>
-    <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
@@ -50,7 +49,7 @@
 
         <div class="modal__box modal__box_type_image">
             <button class="modal__close-button button js-image-close" type="button" name="close button"></button>
-            <img class="modal__image" src=" " alt=" ">
+            <img class="modal__image" src="" alt=" ">
             <div>
                 <p class="modal__image-title"></p>
             </div>
@@ -61,12 +60,12 @@
 
 
     <header class="header">
-        <img class="header__image" src="./images/around-the-us.svg" alt="Around The U.S.">
+        <img class="header__image" src="<%=require('./images/around-the-us.svg')%>" alt="Around The U.S.">
     </header>
     <main>
         <section class="profile">
             <div class="profile__container">
-                <img class="profile__image" src="./images/jacques-cousteau.jpg" alt="Jacques Cousteau">
+                <img class="profile__image" src="<%=require('./images/jacques-cousteau.jpg')%>" alt="Jacques Cousteau">
                 <div class="profile__info">
                     <div class="profile__name-container">
                         <h1 class="profile__name">jacques cousteau</h1>

@@ -1,26 +1,33 @@
+import zionCanyon from "../images/zion-canyon.jpg";
+import yosemiteValley from "../images/Yosemite-valley.jpg";
+import telluride from "../images/telluride.jpg";
+import yellowstone from "../images/yellowstone.jpg";
+import bassHarbor from "../images/bass-harbor.jpg";
+import bigBend from "../images/big-bend.jpg";
+
 export const initialCards = [{
     title: "Yosemite Valley",
-    image: "./images/Yosemite-valley.jpg"
+    image: yosemiteValley
 },
 {
     title: "Zion Canyon",
-    image: "./images/zion-canyon.jpg"
+    image: zionCanyon
 },
 {
     title: "Telluride",
-    image: "./images/telluride.jpg"
+    image: telluride
 },
 {
     title: "Yellowstone",
-    image: "./images/yellowstone.jpg"
+    image: yellowstone
 },
 {
     title: "Bass Harbor",
-    image: "./images/bass-harbor.jpg"
+    image: bassHarbor
 },
 {
     title: "Big Bend",
-    image: "./images/big-bend.jpg"
+    image: bigBend
 }
 ];
 
