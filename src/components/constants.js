@@ -40,7 +40,7 @@ export const formSettings = {
     errorClass: "form__error_visible",
 }
 
-export const selectors = {
+export const elements = {
     imagePopup: document.querySelector(".modal_type_image"),
     formPopupAdd: document.querySelector(".modal_type_add-card"),
     profileEditButton: document.querySelector(".profile__button button"),

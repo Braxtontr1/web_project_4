@@ -1,5 +1,3 @@
-import { selectors } from "./constants";
-
 export default class UserInfo {
     constructor({
         userNameSelector,
@@ -11,11 +9,6 @@ export default class UserInfo {
 
     getUserInfo() {
 
-        console.log({
-            name: this._userName.textContent,
-            job: this._userJob.textContent
-        });
-
         return {
             name: this._userName.textContent,
             job: this._userJob.textContent,
@@ -24,14 +17,14 @@ export default class UserInfo {
     }
 
     setUserInfo({
-        profileName,
-        profileTitle
+        name,
+        job
     })
 
     {
 
-        this._userName.textContent = profileName;
-        this._userJob.textContent = profileTitle;
+        this._userName.textContent = name;
+        this._userJob.textContent = job;
     }
 
 

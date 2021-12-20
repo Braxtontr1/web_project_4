@@ -1,87 +1,86 @@
-import '../pages/index.css';
+import './index.css';
 
 import {
-    selectors,
+    elements,
     formSettings,
     initialCards
-} from "./constants.js";
-import FormValidator from "./FormValidator.js";
-import Card from "./Card.js";
-import Section from "./Section.js";
+} from "../components/constants.js";
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
 import {
     PopupWithForm
-} from "./PopupWithForm.js";
+} from "../components/PopupWithForm.js";
 import {
     PopupWithImage
-} from "./PopupWithImage.js";
-import {
-    openModalWindow,
-    closeModalWindow
-} from "./Utils.js";
-import UserInfo from "./UserInfo.js";
+} from "../components/PopupWithImage.js";
+import UserInfo from "../components/UserInfo.js";
 
 
-const destinations = document.querySelector('.destinations');
-
-const modal = document.querySelector('.modal');
 const editModal = document.querySelector('.modal_type_edit-profile');
 const editForm = editModal.querySelector('.form');
 const addModal = document.querySelector('.modal_type_add-card');
 const addForm = addModal.querySelector('.form');
-const previewModal = document.querySelector('.modal_type_image');
 
 const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
-const editModalCloseButton = editModal.querySelector('.modal__close-button');
-const addModalCloseButton = addModal.querySelector('.modal__close-button');
-
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
 const modalNameInput = document.querySelector('.form__input_type_name');
 const modalDescriptionInput = document.querySelector('.form__input_type_description');
 
-const modalCardTitle = document.querySelector('.form__input_type_title');
-const modalImageLink = document.querySelector('.form__input_type_image-link');
 
+//functions
 
+function createCard(item) {
+    const card = new Card({
+        data: item,
+        handleClick: (data) => cardImagePreview.open(data)
+    }, '#destination-template');
+    const cardElement = card.generateCard();
+    return cardElement;
+}
 
+// class instances for Popups
 
 const addCardPopup = new PopupWithForm({
     popupSelector: document.querySelector('.modal_type_add-card'),
     handleFormSubmission: (item) => {
-        const card = new Card({
-            data: item,
-            handleClick: (data) => cardImagePreview.open(data)
-        }, '#destination-template');
-        const cardElement = card.generateCard();
-        renderInitialCards.addItem(cardElement);;
-
+        renderInitialCards.prependItem(createCard(item));
     }
+
 });
 
-const Userdata = new UserInfo({userNameSelector: profileName, userJobSelector: profileTitle});
+const userdata = new UserInfo({
+    userNameSelector: profileName,
+    userJobSelector: profileTitle
+});
 
 const editFormPopup = new PopupWithForm({
+    handleFormSubmission: ({
+        name,
+        job
+    }) => {
+        userdata.setUserInfo({
+            name,
+            job
+        });
+
+        console.log(name, job)
+    },
     popupSelector: document.querySelector('.modal_type_edit-profile'),
-    handleFormSubmission: ({name, job}) => {
-        Userdata.setUserInfo({name, job});
-    }
 
 });
 
 
-const cardImagePreview = new PopupWithImage(selectors.imagePopup);
+const cardImagePreview = new PopupWithImage(elements.imagePopup);
 
 const renderInitialCards = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card({
-            data: item,
-            handleClick: (data) => cardImagePreview.open(data)
-        }, '#destination-template');
-        const cardElement = card.generateCard();
-        renderInitialCards.addItem(cardElement);
+
+        renderInitialCards.addItem(createCard(item));
 
     }
 }, ".destinations");
@@ -89,11 +88,12 @@ const renderInitialCards = new Section({
 
 
 addModalButton.addEventListener('click', () => {
+    addFormValidator.resetValidation();
     addCardPopup.open();
 });
 
 editModalButton.addEventListener('click', () => {
-    const getData = Userdata.getUserInfo();
+    const getData = userdata.getUserInfo();
     modalNameInput.value = getData.name;
     modalDescriptionInput.value = getData.job;
     editFormPopup.open();

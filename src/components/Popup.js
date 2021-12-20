@@ -1,8 +1,8 @@
-import { selectors } from "./constants.js";
+
 
 export default class Popup {
-    constructor(popupSelector) {
-        this._popupElement = popupSelector;
+    constructor(popupElement) {
+        this._popupElement = popupElement;
         this._handleEscapeClose = this._handleEscapeClose.bind(this);
     }
 
@@ -13,8 +13,12 @@ export default class Popup {
     }
 
     setEventListeners() {
+        this._popupElement.querySelector(".modal__close-button").addEventListener('click', () => {
+            this.close();
+        });
+
         this._popupElement.addEventListener('click', (evt) => {
-            if(evt.target.classList.contains('modal_open')) {
+            if (evt.target.classList.contains('modal_open')) {
                 this.close();
             }
         });
