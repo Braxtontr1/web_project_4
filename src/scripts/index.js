@@ -8,7 +8,9 @@ import {
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import Section from "./Section.js";
-import { PopupWithForm } from "./PopupWithForm.js";
+import {
+    PopupWithForm
+} from "./PopupWithForm.js";
 import {
     PopupWithImage
 } from "./PopupWithImage.js";
@@ -44,26 +46,29 @@ const modalImageLink = document.querySelector('.form__input_type_image-link');
 
 
 
-// // functions
 
-function prefillEditProfileForm() {
-    modalNameInput.value = profileName.textContent;
-    modalDescriptionInput.value = profileTitle.textContent;
-}
+const addCardPopup = new PopupWithForm({
+    popupSelector: document.querySelector('.modal_type_add-card'),
+    handleFormSubmission: (item) => {
+        const card = new Card({
+            data: item,
+            handleClick: (data) => cardImagePreview.open(data)
+        }, '#destination-template');
+        const cardElement = card.generateCard();
+        renderInitialCards.addItem(cardElement);;
 
+    }
+});
+
+const Userdata = new UserInfo({userNameSelector: profileName, userJobSelector: profileTitle});
 
 const editFormPopup = new PopupWithForm({
     popupSelector: document.querySelector('.modal_type_edit-profile'),
-    handleFormSubmission: (data) => {
-      const userData = new UserInfo({userNameSelector: profileName, userJobSelector: profileTitle});
-      userData.getUserInfo({userNameSelector: modalNameInput, userJobSelector: modalDescriptionInput});
+    handleFormSubmission: ({name, job}) => {
+        Userdata.setUserInfo({name, job});
     }
-    
-  });
 
-  editModalButton.addEventListener('click', () => {
-    editFormPopup.open();
-  });
+});
 
 
 const cardImagePreview = new PopupWithImage(selectors.imagePopup);
@@ -82,6 +87,18 @@ const renderInitialCards = new Section({
 }, ".destinations");
 
 
+
+addModalButton.addEventListener('click', () => {
+    addCardPopup.open();
+});
+
+editModalButton.addEventListener('click', () => {
+    const getData = Userdata.getUserInfo();
+    modalNameInput.value = getData.name;
+    modalDescriptionInput.value = getData.job;
+    editFormPopup.open();
+
+});
 
 
 
@@ -102,3 +119,4 @@ cardImagePreview.setEventListeners();
 
 editFormPopup.setEventListeners();
 
+addCardPopup.setEventListeners();

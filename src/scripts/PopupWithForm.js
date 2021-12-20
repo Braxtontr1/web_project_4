@@ -1,10 +1,10 @@
 import Popup from "./Popup.js";
 import {
-    formSettings
+    formSettings, selectors
 } from "./constants.js";
 
 export class PopupWithForm extends Popup {
-    constructor({popupSelector, handleFormSubmission}) {
+    constructor({ handleFormSubmission, popupSelector }) {
         super(popupSelector);
 
 
@@ -26,10 +26,6 @@ export class PopupWithForm extends Popup {
 
         return formValues;
     }
-
-    _formSubmissionHandler () {
-        this._handleFormSubmission(this._getInputValues())
-    }
     
 
     formReset() {
@@ -43,15 +39,25 @@ export class PopupWithForm extends Popup {
     }
 
     setEventListeners() {
-        this._popupElement.addEventListener('submit', this._formSubmissionHandler());
+        this._popupElement.querySelector("button").addEventListener('click', () => { 
+            console.log('close');
+            super.setEventListeners();
+            this.close();
+            });
+
+        this._popupElement.addEventListener('submit', () => { this._handleFormSubmission(this._getInputValues());
         super.setEventListeners();
-        this.formReset();
+        this.close();
+        if (this._popupElement.classList.contains("modal_type_add-card")) {
+            this.formReset();
+        } else return true;
+        });
     }
 
     close() {
-        this._popupElement.classList.remove('modal_open');
-        document.removeEventListener('submit', this._formSubmissionHandler());
         super.close();
+        this._popupElement.classList.remove('modal_open');
+        document.removeEventListener('submit', () => this._handleFormSubmission(this._getInputValues()));
 
     }
 }

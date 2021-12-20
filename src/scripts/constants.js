@@ -6,29 +6,29 @@ import bassHarbor from "../images/bass-harbor.jpg";
 import bigBend from "../images/big-bend.jpg";
 
 export const initialCards = [{
-    title: "Yosemite Valley",
-    image: yosemiteValley
-},
-{
-    title: "Zion Canyon",
-    image: zionCanyon
-},
-{
-    title: "Telluride",
-    image: telluride
-},
-{
-    title: "Yellowstone",
-    image: yellowstone
-},
-{
-    title: "Bass Harbor",
-    image: bassHarbor
-},
-{
-    title: "Big Bend",
-    image: bigBend
-}
+        title: "Yosemite Valley",
+        image: yosemiteValley
+    },
+    {
+        title: "Zion Canyon",
+        image: zionCanyon
+    },
+    {
+        title: "Telluride",
+        image: telluride
+    },
+    {
+        title: "Yellowstone",
+        image: yellowstone
+    },
+    {
+        title: "Bass Harbor",
+        image: bassHarbor
+    },
+    {
+        title: "Big Bend",
+        image: bigBend
+    }
 ];
 
 export const formSettings = {
@@ -43,5 +43,7 @@ export const formSettings = {
 export const selectors = {
     imagePopup: document.querySelector(".modal_type_image"),
     formPopupAdd: document.querySelector(".modal_type_add-card"),
-    
+    profileEditButton: document.querySelector(".profile__button button"),
+    addCardButton: document.querySelector(".profile__card-button"),
+
 }
