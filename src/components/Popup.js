@@ -1,5 +1,3 @@
-
-
 export default class Popup {
     constructor(popupElement) {
         this._popupElement = popupElement;

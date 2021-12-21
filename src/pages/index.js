@@ -4,7 +4,7 @@ import {
     elements,
     formSettings,
     initialCards
-} from "../components/constants.js";
+} from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
@@ -46,7 +46,7 @@ function createCard(item) {
 // class instances for Popups
 
 const addCardPopup = new PopupWithForm({
-    popupSelector: document.querySelector('.modal_type_add-card'),
+    popupElement: addModal,
     handleFormSubmission: (item) => {
         renderInitialCards.prependItem(createCard(item));
     }
@@ -70,7 +70,7 @@ const editFormPopup = new PopupWithForm({
 
         console.log(name, job)
     },
-    popupSelector: document.querySelector('.modal_type_edit-profile'),
+    popupElement: editModal,
 
 });
 
@@ -97,6 +97,7 @@ editModalButton.addEventListener('click', () => {
     const getData = userdata.getUserInfo();
     modalNameInput.value = getData.name;
     modalDescriptionInput.value = getData.job;
+    editFormValidator.resetValidation();
     editFormPopup.open();
 
 });
