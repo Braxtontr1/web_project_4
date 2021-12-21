@@ -89,7 +89,7 @@ const renderInitialCards = new Section({
 
 
 addModalButton.addEventListener('click', () => {
-    addFormValidator.resetForm();
+    addFormValidator.resetValidation();
     addCardPopup.open();
 });
 
