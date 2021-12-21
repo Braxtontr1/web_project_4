@@ -25,6 +25,7 @@ const addForm = addModal.querySelector('.form');
 const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
 
+
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
 const modalNameInput = document.querySelector('.form__input_type_name');
@@ -88,7 +89,7 @@ const renderInitialCards = new Section({
 
 
 addModalButton.addEventListener('click', () => {
-    addFormValidator.resetValidation();
+    addFormValidator.resetForm();
     addCardPopup.open();
 });
 
