@@ -1,13 +1,22 @@
 class Card {
     constructor({
         data,
-        handleClick
+        handleClick,
+        openDeleteModalHandler,
+        userId,
     }, cardSelector) {
-        this._title = data.title;
-        this._image = data.image;
+        this._title = data.name;
+        this._image = data.link;
+        this._id = data._id;
+        this._authUserId = data.owner._id;
+        this._userId = userId;
 
         this._cardSelector = cardSelector;
         this._handleClick = handleClick;
+        this._openDeleteModalHandler = openDeleteModalHandler;
+
+        const deleteModal = document.querySelector('.modal_type_delete-confirmation');
+        const deleteConfirmation = deleteModal.querySelector('.form');
 
     }
 
@@ -22,9 +31,17 @@ class Card {
         this._likeButton.classList.toggle('destination__like-button_active');
     }
 
-    _handleDelete() {
-        this._element.remove();
-        this._element = null;
+    // _openDeleteHandler() {
+    //     this._element.classList
+    // }
+
+    _deleteHandler() {
+        if (this._userId === this._authUserId) {
+            this._deleteButton.classList.add('destination__delete-button_visible');
+        } else {
+            this._deleteButton.classList.remove('destination__delete-button_visible');
+        }
+
     }
 
     _setEventListeners() {
@@ -36,15 +53,18 @@ class Card {
             image: this._image
         }));
 
-        this._element.querySelector('.destination__delete-button').addEventListener('click', () => this._handleDelete());
+        this._element.querySelector('.destination__delete-button').addEventListener('click', () => this._openDeleteModalHandler(this._id));
+
     }
 
     generateCard() {
         this._element = this._getTemplate();
         this._likeButton = this._element.querySelector('.destination__like-button');
         const cardElementImage = this._element.querySelector('.destination__image');
+        this._deleteButton = this._element.querySelector('.destination__delete-button');
 
         this._setEventListeners();
+        this._deleteHandler(this._id);
 
         this._element.querySelector('.destination__title').textContent = this._title;
 
