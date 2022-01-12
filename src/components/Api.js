@@ -102,4 +102,18 @@ export default class Api {
 
             .then(res => this._isOk(res));
     }
+
+    editProfilePicture(data) {
+        return fetch(`${this._baseUrl}/users/me/avatar`, {
+                method: "PATCH",
+                headers: {
+                    authorization: this._authToken,
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({
+                    avatar: data.avatar
+                })
+            })
+            .then(res => this._isOk(res));
+    }
 }

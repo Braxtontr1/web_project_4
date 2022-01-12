@@ -6,7 +6,9 @@
 @import url('../blocks/button/button.css');
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__container/profile__container.css');
+@import url('../blocks/profile/__image-container/profile__image-container.css');
 @import url('../blocks/profile/__image/profile__image.css');
+@import url('../blocks/profile/__image-button/profile__image-button.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__name-container/profile__name-container.css');
 @import url('../blocks/profile/__name/profile__name.css');
@@ -38,8 +40,10 @@
 @import url('../blocks/destination/__image/destination__image.css');
 @import url('../blocks/destination/__info/destination__info.css');
 @import url('../blocks/destination/__title/destination__title.css');
+@import url('../blocks/destination/__like-button-container/destination__like-button-container.css');
 @import url('../blocks/destination/__like-button/destination__like-button.css');
 @import url('../blocks/destination/__like-button/_active/destination__like-button_active.css');
+@import url('../blocks/destination/__like-button-count/destination__like-button-count.css');
 @import url('../blocks/destination/__delete-button/destination__delete-button.css');
 @import url('../blocks/destination/__delete-button/_visible/destination__delete-button_visible.css');
 @import url('../blocks/footer/footer.css');

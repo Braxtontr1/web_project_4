@@ -1,16 +1,17 @@
 import Popup from "./Popup.js";
 
 
-export default class PopupWithConfirmation extends Popup {
+export default class PopupWithDelete extends Popup {
     constructor({
-        popupElement,
         handleFormSubmission,
+        popupElement
     }) {
-        super(popupElement, handleFormSubmission);
+        super(popupElement);
+
+
+        this._handleFormSubmission = handleFormSubmission;
         this._formElement = this._popupElement.querySelector('.form');
-
     }
-
 
     open(cardId, cardElement) {
         super.open();
@@ -19,19 +20,13 @@ export default class PopupWithConfirmation extends Popup {
         console.log(this._cardId);
     }
 
-    _handleFormSubmission = (evt,) => {
-        evt.preventDefault();
-        this._handleFormSubmission(this._cardId, this._cardElemnent);
-    }
-
     setEventListeners() {
         super.setEventListeners();
-
-
         this._popupElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
-
+            this._handleFormSubmission(this._cardId, this._cardElemnent);
             this.close();
         });
     }
+
 }

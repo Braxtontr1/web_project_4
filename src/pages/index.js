@@ -14,26 +14,29 @@ import {
 } from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from '../components/Api.js';
-import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import PopupWithDelete from "../components/PopupWithDelete.js";
 
 
 const editModal = document.querySelector('.modal_type_edit-profile');
 const editForm = editModal.querySelector('.form');
 const addModal = document.querySelector('.modal_type_add-card');
 const addForm = addModal.querySelector('.form');
+const profilePictureModal = document.querySelector('.modal_type_update-profile-picture');
+const profilePictureForm = profilePictureModal.querySelector('.form');
 const deleteModal = document.querySelector('.modal_type_delete-confirmation');
-const deleteConfirmation = deleteModal.querySelector('.form');
 
 const editModalButton = document.querySelector('.profile__button');
 const addModalButton = document.querySelector('.profile__card-button');
-const deleteButton = document.querySelector('.destination__delete-button');
+const profilePictureEditButton = document.querySelector('.profile__image-button');
 
 
 
 const profileName = document.querySelector('.profile__name');
 const profileTitle = document.querySelector('.profile__about-me');
+const profileImage = document.querySelector('profile__image');
 const modalNameInput = document.querySelector('.form__input_type_name');
 const modalDescriptionInput = document.querySelector('.form__input_type_description');
+const modalProfilePicture = document.querySelector('.form__input_type_profile-image-link');
 
 const config = {
     baseUrl: `https://around.nomoreparties.co/v1/group-12`,
@@ -63,48 +66,65 @@ const api = new Api(config);
 
 // })
 
+
 api.getCards().then((res) => {
     const renderInitialCards = new Section({
         items: res,
         renderer: (res) => {
             renderInitialCards.addItem(createCard(res));
-
         }
     }, ".destinations");
-
     renderInitialCards.renderItems(res);
 })
 
 //functions
 
-const deleteCardPopup = new PopupWithConfirmation({
+const deleteCardPopup = new PopupWithDelete({
     popupElement: deleteModal,
     handleFormSubmission: (cardId, cardElement) => {
+        
         api.deleteCard(cardId)
             .then(() => {
                 cardElement.remove()
             })
             .then(() => {
+                console.log(cardId);
                 deleteCardPopup.close()
             })
 
 
-            .catch(err => console.log(`Error: ${err}`));
+
+            .catch(err => console.log(`Error: ${err}`))
     }
 });
 
-function createCard(data) {
+function createCard(item) {
     const card = new Card({
-        data: data,
+        data: item,
         handleClick: (data) => cardImagePreview.open(data),
         userId: userData.getUserId(),
-        openDeleteModalHandler: function openDeleteModalHandler(data) {deleteCardPopup.open(data, cardElement)},
-    }, '#destination-template');
+        openDeleteModalHandler: function openDeleteModalHandler() {
+            deleteCardPopup.open(item._id, cardElement);
+            deleteCardPopup.setEventListeners();
+        },
+        handleLike: function handleLike() {
+            if(this._likeButton.classList.contains("destination__like-button_active")) {
+                api.deleteLike(item._id)
+                .then((data) => this.updateLikeCount(data))
+                .catch(err => console.log(`Error: ${err}`))
+            } else {
+                api.addLike(item._id)
+                .then((data) => this.updateLikeCount(data))
+                .catch(err => console.log(`Error: ${err}`))
+            }
+        }
+    },
+     '#destination-template');
     const cardElement = card.generateCard();
-    console.log(data._id);
     return cardElement;
 
 }
+
 
 // class instances for Popups
 
@@ -115,6 +135,8 @@ const addCardPopup = new PopupWithForm({
             items: item,
             renderer: (item) => {
                 addNewCard.prependItem(createCard(item));
+                
+
             }
         }, '.destinations');
         api.createCard(item);
@@ -122,35 +144,25 @@ const addCardPopup = new PopupWithForm({
 
 });
 
-// const deleteCardPopup = new PopupWithConfirmation({
-//     popupElement: deleteModal,
-//     handleFormSubmission: (cardId, cardElement) => {
-//         api.deleteCard(cardId)
-//             .then(() => {
-//                 cardElement.remove()
-//             })
-//             .then(() => {
-//                 deleteCardPopup.close()
-//             })
-
-
-//             .catch(err => console.log(`Error: ${err}`));
-//     }
-// });
-
 const userData = new UserInfo({
     userNameSelector: profileName,
     userJobSelector: profileTitle,
+    userAvatarSelector: profileImage
 
 });
 
 api.getUserInfo()
     .then((data) => {
+        console.log(data);
         userData.setUserInfo({
             name: data.name,
             job: data.about,
-            _id: data._id
+            _id: data._id,
+            avatar: data.avatar
         })
+    })
+    .then((userData) => {
+        console.log(userData);
     })
     .catch(err => console.log(`Error: ${err}`));
 
@@ -163,6 +175,7 @@ const editFormPopup = new PopupWithForm({
                     name: data.name,
                     job: data.about,
                     id: data._id,
+                    avatar: data.avatar
                 });
                 editFormPopup.close();
             })
@@ -171,7 +184,22 @@ const editFormPopup = new PopupWithForm({
     }
 });
 
-console.log(userData._id);
+const editProfilePicturePopup = new PopupWithForm({
+    popupElement: profilePictureModal,
+    handleFormSubmission: (data) => {
+        api.editProfilePicture(data).then(data => {
+                userData.setProfilePicture({
+                    avatar: data.avatar
+                });
+
+                editProfilePicturePopup.close();
+            })
+
+            .catch(err => console.log(`Error: ${err}`));
+            console.log(data.avatar);
+    } 
+});
+
 const cardImagePreview = new PopupWithImage(elements.imagePopup);
 
 
@@ -183,10 +211,17 @@ addModalButton.addEventListener('click', () => {
 editModalButton.addEventListener('click', () => {
     const getData = userData.getUserInfo();
     modalNameInput.value = getData.name;
-    const getId = userData.getUserId();
     modalDescriptionInput.value = getData.job;
     editFormValidator.resetValidation();
     editFormPopup.open();
+
+});
+
+profilePictureEditButton.addEventListener('click', () => {
+    // const pictureData = userData.setProfilePicture()
+    EditProfilePictureValidator.resetValidation();
+    // modalProfilePicture.src = pictureData.avatar;
+    editProfilePicturePopup.open();
 
 });
 
@@ -198,6 +233,9 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(formSettings, addForm);
 addFormValidator.enableValidation();
 
+const EditProfilePictureValidator = new FormValidator(formSettings, profilePictureForm);
+EditProfilePictureValidator.enableValidation();
+
 
 //class initializations for open and closing popups
 
@@ -207,4 +245,4 @@ editFormPopup.setEventListeners();
 
 addCardPopup.setEventListeners();
 
-deleteCardPopup.setEventListeners();
+editProfilePicturePopup.setEventListeners();

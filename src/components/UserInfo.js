@@ -2,9 +2,11 @@ export default class UserInfo {
     constructor({
         userNameSelector,
         userJobSelector,
+        userAvatarSelector
     }) {
         this._userName = userNameSelector;
         this._userJob = userJobSelector;
+        this._avatar = userAvatarSelector;
     }
 
     getUserInfo() {
@@ -16,10 +18,15 @@ export default class UserInfo {
 
     }
 
+    setProfilePicture() {
+        this._avatar.src = avatar;
+    }
+
     setUserInfo({
         name,
         job,
-        _id
+        _id,
+        avatar
     })
 
     {
@@ -27,6 +34,9 @@ export default class UserInfo {
         this._userName.textContent = name;
         this._userJob.textContent = job;
         this._id = _id;
+        this._avatar.src = avatar.value;
+        console.log(this._avatar);
+
     }
 
     getUserId() {

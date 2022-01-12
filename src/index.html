@@ -39,13 +39,11 @@
                     placeholder="Image Link" required>
                 <span class="form__error" id="image-error"></span>
                 <button class="form__button button form__button_disabled" type="submit" name="save button"
-                    value="Create">Create</button>
+                    value="Create">create</button>
             </form>
 
         </div>
     </div>
-
-
 
     <div class="modal modal_type_image">
 
@@ -62,9 +60,22 @@
         <div class="modal__box">
             <button class="modal__close-button button" type="button" name="close button"></button>
             <form class="form" name="delete-button">
-                <h2 class="form__heading">Are you sure?</h2>
-                <button class="form__button button" type="submit" name="delete button"
-                    value="Yes">Yes</button>
+                <h2 class="form__heading">are you sure?</h2>
+                <button class="form__button button" type="submit" name="delete button" value="Yes">yes</button>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal modal_type_update-profile-picture">
+        <div class="modal__box">
+            <button class="modal__close-button button" type="button" name="close button"></button>
+            <form class="form" name="delete-button">
+                <h2 class="form__heading">change profile picture</h2>
+                <input class="form__input form__input_type_image-link" type="url" id="avatar" name="avatar"
+                    placeholder="Image Link" required>
+                <span class="form__error" id="avatar-error"></span>
+                <button class="form__button button" type="submit" name="delete button" value="Yes">save</button>
             </form>
 
         </div>
@@ -79,7 +90,12 @@
     <main>
         <section class="profile">
             <div class="profile__container">
-                <img class="profile__image" src="<%=require('./images/jacques-cousteau.jpg')%>" alt="Jacques Cousteau">
+                <div class="profile__image-container">
+                    <button class="profile__image-button">
+                    </button>
+                    <img class="profile__image" src=""
+                    alt="Jacques Cousteau">
+                </div>
                 <div class="profile__info">
                     <div class="profile__name-container">
                         <h1 class="profile__name">jacques cousteau</h1>
@@ -102,7 +118,9 @@
             <img class="destination__image">
             <div class="destination__info">
                 <h2 class="destination__title"></h2>
-                <button class=" destination__like-button button" type="button" name="like button"></button>
+                <div class="destination__like-button-container">
+                    <button class=" destination__like-button button" type="button" name="like button"></button>
+                    <span class="destination__like-button-count"></span></div>
             </div>
         </article>
     </template>
