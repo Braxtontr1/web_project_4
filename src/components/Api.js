@@ -17,7 +17,7 @@ export default class Api {
                     authorization: this._authToken
                 }
             })
-            .then(this._isOk);
+            .then(res => this._isOk(res));
     }
 
     getCards() {
@@ -27,7 +27,7 @@ export default class Api {
                 },
                 method: "GET"
             })
-            .then(this._isOk);
+            .then(res => this._isOk(res));
     }
 
     createCard(data) {

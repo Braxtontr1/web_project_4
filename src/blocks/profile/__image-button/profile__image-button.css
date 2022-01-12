@@ -16,10 +16,3 @@
 .profile__image-button:hover {
     opacity: 80%;
 }
-
-
-@media screen and (max-width: 880px) {
-    .profile__image-button {
-        margin: auto;
-    }
-}

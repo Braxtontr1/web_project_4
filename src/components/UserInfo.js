@@ -18,7 +18,9 @@ export default class UserInfo {
 
     }
 
-    setProfilePicture() {
+    setProfilePicture({
+        avatar
+    }) {
         this._avatar.src = avatar;
     }
 
@@ -34,8 +36,8 @@ export default class UserInfo {
         this._userName.textContent = name;
         this._userJob.textContent = job;
         this._id = _id;
-        this._avatar.src = avatar.value;
-        console.log(this._avatar);
+        this._avatar.src = avatar;
+        this._avatar.alt = name;
 
     }
 

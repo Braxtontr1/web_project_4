@@ -34,7 +34,7 @@ class Card {
     _likeButtonHandler() {
         this._likeCount.textContent = this._likes.length;
 
-        if(this._likes.filter((user) => user._id === this._userId).length > 0) {
+        if (this._likes.filter((user) => user._id === this._userId).length > 0) {
             this._likeButton.classList.add("destination__like-button_active");
         } else {
             this._likeButton.classList.remove("destination__like-button_active");
