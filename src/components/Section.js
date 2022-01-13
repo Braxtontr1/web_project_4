@@ -4,7 +4,7 @@ export default class Section {
     renderer,
     userId
   }, containerSelector) {
-    this._renderedItems = items;
+    this.renderedItems = items;
     this._renderer = renderer;
     this._userId = userId;
     this._container = document.querySelector(containerSelector);
@@ -19,7 +19,7 @@ export default class Section {
   }
 
   renderItems() {
-    this._renderedItems.forEach(item => {
+    this.renderedItems.forEach(item => {
       this._renderer(item);
     });
   }

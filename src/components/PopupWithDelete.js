@@ -26,10 +26,5 @@ export default class PopupWithDelete extends Popup {
         });
     }
 
-    close() {
-        super.close();
-    }
-
-
 
 }

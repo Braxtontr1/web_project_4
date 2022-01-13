@@ -69,7 +69,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
             _id: _id,
             avatar: avatar
         });
-        renderInitialCards._renderedItems = cards;
+        renderInitialCards.renderedItems = cards;
         renderInitialCards.renderItems();
     })
     .catch(err => console.log(`Error: ${err}`))
@@ -158,6 +158,8 @@ const editFormPopup = new PopupWithForm({
                     id: data._id,
                     avatar: data.avatar
                 });
+            })
+            .then(() => {
                 editFormPopup.close();
             })
 
@@ -179,6 +181,9 @@ const editProfilePicturePopup = new PopupWithForm({
                 userData.setProfilePicture({
                     avatar: data.avatar
                 })
+            })
+            .then(() => {
+                editProfilePicturePopup.close();
             })
             .catch((err) => {
                 console.log(`Error: ${err}`)
