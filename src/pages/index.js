@@ -38,21 +38,48 @@ const modalDescriptionInput = document.querySelector('.form__input_type_descript
 
 const config = {
     baseUrl: `https://around.nomoreparties.co/v1/group-12`,
-    authToken: "9b1558af-91ea-493b-ada9-7496ba6fa8e8"
+    headers: {
+        authorization: "9b1558af-91ea-493b-ada9-7496ba6fa8e8",
+        "Content-Type": "application/json"
+    },
 }
 
 
 const api = new Api(config);
 
-api.getCards().then((res) => {
-    const renderInitialCards = new Section({
-        items: res,
-        renderer: (res) => {
-            renderInitialCards.addItem(createCard(res));
-        }
-    }, ".destinations");
-    renderInitialCards.renderItems(res);
-})
+
+const userData = new UserInfo({
+    userNameSelector: profileName,
+    userJobSelector: profileTitle,
+    userAvatarSelector: profileImage
+
+});
+
+Promise.all([api.getUserInfo(), api.getCards()])
+    .then(([userInfo, cards]) => {
+        const {
+            name,
+            about,
+            avatar,
+            _id
+        } = userInfo;
+        userData.setUserInfo({
+            name: name,
+            job: about,
+            _id: _id,
+            avatar: avatar
+        });
+        renderInitialCards._renderedItems = cards;
+        renderInitialCards.renderItems();
+    })
+    .catch(err => console.log(`Error: ${err}`))
+
+
+const renderInitialCards = new Section({
+    renderer: (item) => {
+        renderInitialCards.addItem(createCard(item));
+    }
+}, ".destinations");
 
 //functions
 
@@ -63,16 +90,15 @@ function createCard(item) {
             userId: userData.getUserId(),
             openDeleteModalHandler: function openDeleteModalHandler() {
                 deleteCardPopup.open(item._id, cardElement);
-                deleteCardPopup.setEventListeners();
             },
             handleLike: function handleLike() {
-                if (this._likeButton.classList.contains("destination__like-button_active")) {
+                if (card.isLiked()) {
                     api.deleteLike(item._id)
-                        .then((data) => this.updateLikeCount(data))
+                        .then((data) => card.updateLikeCount(data))
                         .catch(err => console.log(`Error: ${err}`))
                 } else {
                     api.addLike(item._id)
-                        .then((data) => this.updateLikeCount(data))
+                        .then((data) => card.updateLikeCount(data))
                         .catch(err => console.log(`Error: ${err}`))
                 }
             }
@@ -95,7 +121,6 @@ const deleteCardPopup = new PopupWithDelete({
                 cardElement.remove()
             })
             .then(() => {
-                console.log(cardId);
                 deleteCardPopup.close()
             })
             .catch(err => console.log(`Error: ${err}`))
@@ -107,7 +132,11 @@ const addCardPopup = new PopupWithForm({
     handleFormSubmission: (item) => {
         api.createCard(item)
             .then((item) => {
-                document.querySelector('.destinations').prepend(createCard(item));
+                renderInitialCards.prependItem(createCard(item));
+            })
+
+            .then(() => {
+                addCardPopup.close();
             })
             .catch((err) => {
                 console.log(`Error: ${err}`)
@@ -118,25 +147,6 @@ const addCardPopup = new PopupWithForm({
     }
 
 });
-
-const userData = new UserInfo({
-    userNameSelector: profileName,
-    userJobSelector: profileTitle,
-    userAvatarSelector: profileImage
-
-});
-
-api.getUserInfo()
-    .then((data) => {
-        userData.setUserInfo({
-            name: data.name,
-            job: data.about,
-            _id: data._id,
-            avatar: data.avatar
-        })
-    })
-    .catch(err => console.log(`Error: ${err}`));
-
 
 const editFormPopup = new PopupWithForm({
     popupElement: editModal,
@@ -199,7 +209,7 @@ editModalButton.addEventListener('click', () => {
 });
 
 profilePictureEditButton.addEventListener('click', () => {
-    EditProfilePictureValidator.resetValidation();
+    editProfilePictureValidator.resetValidation();
     editProfilePicturePopup.open();
 
 });
@@ -212,8 +222,8 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(formSettings, addForm);
 addFormValidator.enableValidation();
 
-const EditProfilePictureValidator = new FormValidator(formSettings, profilePictureForm);
-EditProfilePictureValidator.enableValidation();
+const editProfilePictureValidator = new FormValidator(formSettings, profilePictureForm);
+editProfilePictureValidator.enableValidation();
 
 
 //class initializations for open and closing popups
@@ -225,3 +235,5 @@ editFormPopup.setEventListeners();
 addCardPopup.setEventListeners();
 
 editProfilePicturePopup.setEventListeners();
+
+deleteCardPopup.setEventListeners();

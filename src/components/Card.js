@@ -50,6 +50,14 @@ class Card {
 
     }
 
+    isLiked() {
+        if (this._likeButton.classList.contains("destination__like-button_active")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     _setEventListeners() {
 
         this._likeButton.addEventListener('click', () => this._handleLike());
